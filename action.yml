@@ -39,5 +39,6 @@ runs:
       uses: gradle/wrapper-validation-action@v1
     - name: Publish package
       run: ${{ inputs.workspace }}/gradlew jar publish
+      shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
