@@ -35,10 +35,13 @@ runs:
     - name: Make gradlew executable
       run: chmod +x ${{ inputs.workspace }}/gradlew
       shell: bash
+    - name: Move autograding Gradle build files
+      run: mv ${{ github.action_path }}/gradle/* ${{ inputs.workspace }}/
+      shell: bash
     - name: Validate Gradle wrapper
       uses: gradle/wrapper-validation-action@v1
     - name: Publish package
-      run: ${{ inputs.workspace }}/gradlew jar publish
+      run: ${{ inputs.workspace }}/gradlew jar publish -build-file publish.gradle
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
