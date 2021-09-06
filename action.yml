@@ -25,12 +25,10 @@ inputs:
     required: true
   organization:
     description: "GitHub organization to which packages will be published"
-    required: false
-    default: ddc-java
+    required: true
   maven-repository:
     description: "GitHub repository to which packages will be published"
-    required: false
-    default: maven-artifacts
+    required: true
 runs:
   using: composite
   steps:
