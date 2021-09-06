@@ -17,9 +17,20 @@ inputs:
   workspace:
     description: "Base directory of project."
     required: true
-  token:
-    description: "GITHUB_TOKEN or PAT for publishing to GitHub Packages"
+  package-publisher-user:
+    description: "Username of authenticated user for package installation"
     required: true
+  package-publisher-token:
+    description: "Personal access token of authenticated user for package installation"
+    required: true
+  organization:
+    description: "GitHub organization to which packages will be published"
+    required: false
+    default: ddc-java
+  maven-repository:
+    description: "GitHub repository to which packages will be published"
+    required: false
+    default: maven-artifacts
 runs:
   using: composite
   steps:
@@ -44,4 +55,7 @@ runs:
       run: ${{ inputs.workspace }}/gradlew jar publish -build-file publish.gradle
       shell: bash
       env:
-        GITHUB_TOKEN: ${{ inputs.token }}
+        PACKAGE_PUBLISHER_USER: ${{ inputs.package-publisher-user }}
+        PACKAGE_PUBLISHER_TOKEN: ${{ inputs.package-publisher-token }}
+        ORGANIZATION: ${{ inputs.organization }}
+        MAVEN_REPOSITORY: ${{ inputs.maven-repository }}
